@@ -1,0 +1,178 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "projecttickets",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.17.1",
+      "toolsId": "99d410b1-be46-4b1a-be35-aa662bd5f732"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/TicketsService/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zticketsapp-manage": {
+          "semanticObject": "zticketsapp",
+          "action": "manage",
+          "title": "{{zticketsapp-manage.flpTitle}}",
+          "subTitle": "{{zticketsapp-manage.flpSubtitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.134.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "projecttickets.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "ProjectsSetList",
+          "target": "ProjectsSetList"
+        },
+        {
+          "pattern": "ProjectsSet({key}):?query:",
+          "name": "ProjectsSetObjectPage",
+          "target": "ProjectsSetObjectPage"
+        },
+        {
+          "pattern": "ProjectsSet({key})/Incidents({key2}):?query:",
+          "name": "TicketsSetObjectPage",
+          "target": "TicketsSetObjectPage"
+        }
+      ],
+      "targets": {
+        "ProjectsSetList": {
+          "type": "Component",
+          "id": "ProjectsSetList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/ProjectsSet",
+              "variantManagement": "Page",
+              "navigation": {
+                "ProjectsSet": {
+                  "detail": {
+                    "route": "ProjectsSetObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ProjectsSetObjectPage": {
+          "type": "Component",
+          "id": "ProjectsSetObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/ProjectsSet",
+              "navigation": {
+                "Incidents": {
+                  "detail": {
+                    "route": "TicketsSetObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "TicketsSetObjectPage": {
+          "type": "Component",
+          "id": "TicketsSetObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/ProjectsSet/Incidents"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "welcomeFile": "projecttickets/webapp/index.html",
+  "authenticationMethod": "none",
+  "sessionTimeout": 10,
+  "pluginMetadataEndpoint": "/metadata",
+  "routes": [
+    {
+      "source": "^/projecttickets/webapp/( .* )$",
+      "target": "$1",
+      "localDir": "projecttickets/webapp",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/( .* )$",
+      "destination": "srv-api",
+      "authenticationType": "none",
+      "csrfProtection": false
+    }
+  ],
+  "logout": {
+    "logoutEndpoint": "/my/logout",
+    "logoutPage": "https://www.sap.com"
+  }
+}

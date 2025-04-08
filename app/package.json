@@ -1,0 +1,15 @@
+{
+  "name": "app_ticket",
+  "version": "1.0.0",
+  "description": "Application for Tickets Incident",
+  "main": "index.js",
+  "scripts": {
+    "start":"node node_modules/@sap/approuter/approuter.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "amine abk",
+  "license": "ISC",
+  "dependencies": {
+    "@sap/approuter": "^20.1.0"
+  }
+}
